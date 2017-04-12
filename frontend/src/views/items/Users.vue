@@ -173,7 +173,9 @@ export default {
       this.$store.dispatch(dispatch, sendData)
     },
     handleDelete(index, row) {
+      this.$message.error(' API 是可以用的, 请不要删除用户 谢谢啦!😀');
       const _this = this
+      return;
       this.$store.dispatch('DELETE_ADMIN_ITEM', {
         url: `user/${row._id}`,
         msg: _this.$message,

@@ -7,10 +7,9 @@
     el-table(:data='items', border='', style='width: 100%')
       el-table-column(type='expand')
         template(scope='props')
-          el-form.demo-table-expand(label-position='left', inline='')
-            el-form-item(label='点赞列表', style='width: 100%')
-               div(v-for='like in props.row.likes') {{like.user.nickname}}
-
+          h1 预览
+          div(v-html='templateHtml(props.row.content)')
+          br
       el-table-column(type="index", width="100")
       el-table-column(prop='_index', label='索引')
       el-table-column(prop='title', label='标题')
@@ -87,7 +86,8 @@ export default {
     handleCurrentChange(val) {
       this.fetch(val - 1)
       console.log(`当前页: ${val}`);
-    }
+    },
+    templateHtml(html) {return `<div v-highlightjs>${html}</div>`},
   },
   beforeMount () {
     this.fetch()
