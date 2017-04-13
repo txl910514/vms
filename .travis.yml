@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "6"
+services:
+  - mongodb
+before_script:
+  - cd backend/utils
+  - cp config.simple.js config.js
+  - cd ..
+  - npm install
+script:
+  - npm run test
