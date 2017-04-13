@@ -11,7 +11,7 @@ Vue Management System
 
 ### 特性
 
-* Vue 2+
+* Vue.js 2+
 * Element UI
 * 集成 wangEditor 富文本编辑器 (新浪表情包支持)
 * 集成七牛云图片上传
@@ -31,7 +31,7 @@ cd backend/utils
 cp config.simple.js config.js
 cd ..
 // 运行
-node index.js
+NODE_ENV=dev node index.js
 
 
 // 启动前端
