@@ -51,6 +51,8 @@ app.use((err, req, res, next) => {
   });
 });
 
+
+// create user
 const createUser = async ()=> {
 
   const id = '123454321';
@@ -74,6 +76,6 @@ app.use('/api/admin', routers.admin);
 models.connect();
 
 console.log('=====================================================');
-console.log('vms SERVICES START AT ' + $.dateformat(new Date()));
+console.log('VMS SERVICES START AT ' + $.dateformat(new Date()));
 console.log('=====================================================');
 export default app;

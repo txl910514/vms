@@ -1,5 +1,7 @@
 <template lang="pug">
 #admin-article.admin
+  p Tips: 点击表格左边旋钮 可预览文章
+  br
   vsearch(model='Article', searchKey='title', :start='start')
   router-link(to='/addArticle')
       el-button.add-btn(type="text" @click="") 新建文章

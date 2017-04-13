@@ -29,6 +29,7 @@ export default {
   },
   data () {
     return {
+      max: 5,
       dialogVisible: false,
       voteForm: {
         points: [{
@@ -52,7 +53,10 @@ export default {
       }
     },
     addItem() {
-      if(this.voteForm.points.length >= 5) {return;}
+      if(this.voteForm.points.length >= this.max) {
+        this.$message.error(`最多 ${this.max} 个投票项`)
+        return;
+      }
       this.voteForm.points.push({
         value: '',
         key: Date.now()
@@ -63,7 +67,10 @@ export default {
       Object.assign(this.$data, this.$options.data());
     },
     onSubmit() {
-      if (!this.voteForm.title || !this.voteForm.points.length) {return}
+      if (!this.voteForm.title || !this.voteForm.points.length) {
+        this.$message.error('内容未填写')
+        return;
+      }
       console.log(this.voteForm)
       let _this = this
       this.$store.dispatch('ADD_ADMIN_ITEM', {

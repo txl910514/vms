@@ -45,10 +45,18 @@ export default {
     },
     onSubmit() {
 
-      let _this = this, dispatch = 'ADD_ADMIN_ITEM', editorStatus = this.$store.state.editorStatus;
-      let html = this.$store.state.editor.$txt.html(), url = 'article';
+      let _this      = this,
+      dispatch       = 'ADD_ADMIN_ITEM',
+      editorStatus   = this.$store.state.editorStatus;
+      let html       = this.$store.state.editor.$txt.html(), url = 'article';
       let formatText = this.$store.state.editor.$txt.formatText();
-      if (!this.form.title || !html || this.form.status === 'schedule' && this.form.sendAt < Date.now()) {return;}
+      if (!this.form.title ||
+          !html ||
+          this.form.status === 'schedule' &&
+          this.form.sendAt < Date.now()) {
+        this.$message.error('内容未填写');
+        return;
+      }
       this.$set(this.form, 'content', html)
 
       if (editorStatus === 'updateArticle') {
@@ -62,8 +70,14 @@ export default {
         data: _this.form,
         cb: () => {
           _this.$set(_this, 'dialogVisible', true)
-          _this.$store.commit('SET_ITEM', {key: 'editorStatus', val: 'createArticle'})
-          _this.$store.commit('SET_ITEM', {key: 'article', val: {}})
+          _this.$store.commit('SET_ITEM', {
+            key: 'editorStatus',
+            val: 'createArticle'
+          })
+          _this.$store.commit('SET_ITEM', {
+            key: 'article',
+            val: {}
+          })
         }
       })
     }
@@ -71,7 +85,8 @@ export default {
   mounted () {
     let _this = this, article = this.$store.state.medium;
 
-    tools.qiniu(_this, 'editor-header', 'editor-header', 'article/header', (sourceLink) => {
+    tools.qiniu(_this, 'editor-header', 'editor-header', 'article/header',
+      (sourceLink) => {
       _this.$set(_this.form, 'headerImg', sourceLink)
     })
 

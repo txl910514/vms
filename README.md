@@ -1,15 +1,15 @@
 # VMS
-Vue Management System
+Vue.js Management System
 
 [![Build Status](https://travis-ci.org/ericjjj/vms.svg?branch=master)](https://travis-ci.org/ericjjj/vms)
 [![Code Climate](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/badges/be1cc8f745e432cd57ec/gpa.svg)](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/feed)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-### 环境
+### ENV
 * nodejs 6+
 * mongodb 3+
 
-### 特性
+### Features
 
 * Vue.js 2+
 * Element UI
@@ -20,30 +20,44 @@ Vue Management System
 * 后端角色权限控制
 * 容易部署
 
-### 如何运行
+### How to Start
 
 ```bash
+// clone project
 git clone https://github.com/ericjjj/vms.git
 
-// 启动后端, 依赖 mongodb
+// start backend, need mongodb
 cd backend/utils
-// 复制配置文件, 并修改对应配置
+// modify config.js
 cp config.simple.js config.js
 cd ..
-// 运行
+// start
 NODE_ENV=dev node index.js
 
-
-// 启动前端
+// start websites
 cd frontend/src
-// 复制配置文件, 并修改对应配置
+// modify config.js
 cp config.simple.js config.js
 cd ..
-// 运行
+// start
 npm run dev
 ```
 
-### 测试
+### Deploy
+```bash
+cd frontend
+// build static files
+npm run build
+cd backend
+// modify processes.json
+// see http://pm2.keymetrics.io/docs/usage/deployment/
+pm2 deploy processes.json production setup
+// cp config.simple.js config.js
+pm2 deploy processes.json production
+```
+
+
+### Test
 ```bash
 cd backend
 npm run test
