@@ -1,8 +1,8 @@
 # VMS
 Vue Management System
 
+[![Build Status](https://travis-ci.org/ericjjj/vms.svg?branch=master)](https://travis-ci.org/ericjjj/vms)
 [![Code Climate](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/badges/be1cc8f745e432cd57ec/gpa.svg)](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/feed)
-[![Test Coverage](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/badges/be1cc8f745e432cd57ec/coverage.svg)](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/coverage)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
 ### 环境
