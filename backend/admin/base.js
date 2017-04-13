@@ -30,6 +30,11 @@ function addMethods(_this) {
   }
 
   methods.update = async function (req, res, next) {
+    let exist = await _this.model.find({ "_id": req.params.id });
+    if (exist.openid === '123454321') {
+       $.result(res, 'this is test account');
+       return;
+    }
     let documents = await _this.model.update({ "_id": req.params.id }, req.body)
     if (documents === -1) $.result(res, 'update failed');
     else $.result(res, documents);

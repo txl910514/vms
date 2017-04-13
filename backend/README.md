@@ -16,9 +16,6 @@ npm run prod
 # 测试模式运行
 npm run test
 
-# 查看测试覆盖率
-npm run cover
-
 # 生成文档
 npm run doc
 访问文档: http://127.0.0.1:3000
@@ -55,23 +52,3 @@ pm2 deploy processes.json production
     "morgan":          "~1.7.0",  // log
     "node-schedule":   "^1.2.0",  // 定时
     "qiniu":           "^6.1.13"  // 上传图片 token
-
-
-### 结构
-```
-.
-├── README.md
-├── app.js
-├── api_router_v1.js
-├── package.json
-├── processes.json
-├── config.js
-├── models/*
-├── controllers/*
-├── services/*
-├── bin/*
-├── test/*
-└── public/*
-``` bash
-db.users.save({"company" : "", "title" : "", "signature" : "", "introduction" : "", "openid" : "0", "password" : "123456", "token" : "8047669dfe48657634f14d0d9b31f8da", "code" : "9BXZUXR", "phone" : { "number" : "", "hidden" : false }, "wechat" : { "number" : "", "hidden" : false }, "email" : { "addr" : "jiakeqi@geekpark.net", "hidden" : false }, "status" : -1, "permission" : [ "admin" ], "nickname" : "test" });
-```

@@ -6,14 +6,15 @@ Vue.js Management System
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
 ### ENV
-* nodejs 6+
-* mongodb 3+
+* Node.js 6+
+* MongoDB 3+
 
 ### Features
 
 * Vue.js 2+
 * Element UI
 * 集成 wangEditor 富文本编辑器 (新浪表情包支持)
+* 集成轻量级 markdown 编辑器
 * 集成七牛云图片上传
 * 集成极光推送
 * 完整 Node.js 后端
@@ -23,36 +24,36 @@ Vue.js Management System
 ### How to Start
 
 ```bash
-// clone project
+# clone project
 git clone https://github.com/ericjjj/vms.git
 
-// start backend, need mongodb
+# start backend, need mongodb
 cd backend/utils
-// modify config.js
+# modify config.js
 cp config.simple.js config.js
 cd ..
-// start
+# start
 NODE_ENV=dev node index.js
 
-// start websites
+# start websites
 cd frontend/src
-// modify config.js
+# modify config.js
 cp config.simple.js config.js
 cd ..
-// start
+# start
 npm run dev
 ```
 
 ### Deploy
 ```bash
 cd frontend
-// build static files
+# build static files
 npm run build
 cd backend
-// modify processes.json
-// see http://pm2.keymetrics.io/docs/usage/deployment/
+# modify processes.json
+# see http://pm2.keymetrics.io/docs/usage/deployment/
 pm2 deploy processes.json production setup
-// cp config.simple.js config.js
+# cp config.simple.js config.js
 pm2 deploy processes.json production
 ```
 

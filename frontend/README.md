@@ -1,5 +1,3 @@
-# Top View Admin
-
 
 ## Build Setup
 
@@ -13,13 +11,5 @@ npm run dev
 # build for production with minification
 npm run build
 
-```
-
-## deploy
-``` bash
-# only first
-git remote  add macmini  ssh://geeklabs.vc/home/eric/top/admin
-# push
-git push macmini master
 ```
 

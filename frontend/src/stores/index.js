@@ -6,11 +6,12 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    adminItems: [],
-    medium: {},
-    uptoken: '',
-    total: {},
-    editorStatus: 'createArticle'
+    adminItems:   [],
+    medium:       {},
+    uptoken:      '',
+    total:        {},
+    editorStatus: 'createArticle',
+    editorType:   'richText',
   },
 
   mutations: {

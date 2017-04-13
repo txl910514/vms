@@ -9,6 +9,7 @@
         el-option(label='发送', value='send')
     el-form-item(label='时间', v-if='_form.status === "schedule"')
       el-date-picker( v-model='_form.sendAt', type='datetime', placeholder='选择日期时间')
+    el-button(type='primary', size="large", @click='changeEditor') 切换编辑器
     el-button(type='primary', size="large", @click='onSubmit') 提交
     el-dialog(title='去查看', v-model='dialogVisible')
       .dialog-footer(slot='footer')
@@ -33,6 +34,15 @@ export default {
     }
   },
   methods: {
+    changeEditor () {
+      const current = this.$store.state.editorType
+      let to = current === 'markdown' ? 'richText' : 'markdown'
+      this.$store.commit('SET_ITEM', {
+        key: 'editorType',
+        val: to
+      })
+      this.$message.success(to)
+    }
   },
   beforeMount () {
   }

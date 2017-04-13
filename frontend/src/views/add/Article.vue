@@ -6,7 +6,8 @@
     #editor-header.border1
       img(:src='form.headerImg', alt='', v-if='form.headerImg')
       #header-button(v-else) 点击上传 .jpg/.png (可选)
-    veditor#veditor(style="height:400px;max-height:500px;")
+    vmarkdown(style="height:400px;max-height:500px;" v-if='isMarkdownEditor')
+    veditor#veditor(style="height:400px;max-height:500px;", v-else)
     commit-component(:_form         = 'form',
                      :dialogVisible = 'dialogVisible',
                      :onSubmit      = 'onSubmit',
@@ -21,6 +22,9 @@ import * as api from '../../stores/api'
 export default {
   name: 'add-article',
   computed: {
+    isMarkdownEditor () {
+     return this.$store.state.editorType === 'markdown'
+    }
   },
   data () {
     return {
@@ -31,6 +35,8 @@ export default {
         sendAt:    '',
         status:    'send',
         content:   '',
+        html:      '',
+        markdown:  '',
       },
       uptoken:        '',
       editor:         {},
@@ -39,25 +45,31 @@ export default {
     }
   },
   methods: {
+
     dialogConfim () {
       this.$router.push('/articles')
       Object.assign(this.$data, this.$options.data());
     },
     onSubmit() {
 
-      let _this      = this,
-      dispatch       = 'ADD_ADMIN_ITEM',
-      editorStatus   = this.$store.state.editorStatus;
-      let html       = this.$store.state.editor.$txt.html(), url = 'article';
-      let formatText = this.$store.state.editor.$txt.formatText();
+      let _this    = this,
+      dispatch     = 'ADD_ADMIN_ITEM',
+      url          = 'article',
+      editorStatus = this.$store.state.editorStatus;
       if (!this.form.title ||
-          !html ||
           this.form.status === 'schedule' &&
           this.form.sendAt < Date.now()) {
         this.$message.error('内容未填写');
         return;
       }
-      this.$set(this.form, 'content', html)
+
+      if (isMarkdownEditor) {
+        // let html       = this.$store.state.editor.$txt.html();
+        // this.$set(this.form, 'content', html)
+      } else {
+        let html       = this.$store.state.editor.$txt.html();
+        this.$set(this.form, 'content', html)
+      }
 
       if (editorStatus === 'updateArticle') {
         dispatch = 'UPDATE_ADMIN_ITEM',
