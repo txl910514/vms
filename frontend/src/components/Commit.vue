@@ -35,6 +35,10 @@ export default {
   },
   methods: {
     changeEditor () {
+      if (this.$route.query.id) {
+        this.$message.error('已经编辑过, 不能切换, 请新建文章')
+        return
+      }
       const current = this.$store.state.isMarkdownEditor
       this.$store.commit('SET_ITEM', {
         key: 'isMarkdownEditor',

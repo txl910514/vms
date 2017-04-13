@@ -1,17 +1,11 @@
 <template lang="pug">
 #admin-article.admin
-  p Tips: 点击表格左边旋钮 可预览文章
   br
   vsearch(model='Article', searchKey='title', :start='start')
   router-link(to='/addArticle')
       el-button.add-btn(type="text" @click="") 新建文章
   template
     el-table(:data='items', border='', style='width: 100%')
-      el-table-column(type='expand')
-        template(scope='props')
-          h1 预览
-          div(v-html='templateHtml(props.row)')
-          br
       el-table-column(type="index", width="100")
       el-table-column(prop='_index', label='索引', width="100")
       el-table-column(prop='title', label='标题')
@@ -24,6 +18,8 @@
           el-button(size='small',
                     @click='handleEdit(scope.$index, scope.row)') 编辑
           el-button(size='small',
+                    @click='handlePreview(scope.$index, scope.row)') 预览
+          el-button(size='small',
                     type='danger',
                     @click='handleDelete(scope.$index, scope.row)') 删除
   el-pagination(@size-change='handleSizeChange',
@@ -35,6 +31,8 @@
 </template>
 
 <script>
+import hljs       from 'highlight.js'
+
 export default {
   name: 'admin-article',
   computed: {
@@ -56,6 +54,7 @@ export default {
       const _this = this
       const cb = function (result) {
         _this.$set(_this, 'start', start)
+        hljs.initHighlightingOnLoad()
       }
       this.$store.dispatch('FETCH_ADMIN_ITEMS', {
         cb: cb,
@@ -76,20 +75,15 @@ export default {
         cb: _this.fetch
       })
     },
+    handlePreview (index, row) {
+      this.$router.push(`/article?id=${row._id}`)
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
       this.fetch(val - 1)
       console.log(`当前页: ${val}`);
-    },
-    templateHtml(article) {
-      if (article.markdown) {
-        return `<div v-highlightjs>${
-          marked(article.markdown, { sanitize: true })
-        }</div>`
-      }
-      return `<div v-highlightjs>${article.html}</div>`
     },
   },
   beforeMount () {

@@ -6,8 +6,7 @@
     #editor-header.border1
       img(:src='form.headerImg', alt='', v-if='form.headerImg')
       #header-button(v-else) 点击上传 .jpg/.png (可选)
-    vmarkdown(style="height:400px;max-height:500px;"
-              v-if='isMarkdownEditor' v-bind:markdown='form.markdown')
+    vmarkdown(v-if='isMarkdownEditor' v-bind:markdown='form.markdown')
     veditor#veditor(style="height:400px;max-height:500px;", v-else)
     commit-component(:_form         = 'form',
                      :dialogVisible = 'dialogVisible',
@@ -64,10 +63,9 @@ export default {
       }
 
       if (this.isMarkdownEditor) {
-        this.$set(this.form, 'markdown', this.$store.state.editor)
+        this.form.markdown = this.$store.state.editor.value();
       } else {
-        let html = this.$store.state.editor.$txt.html();
-        this.$set(this.form, 'html', html)
+        this.form.html = this.$store.state.editor.$txt.html();
       }
 
       if (this.isUpdate) {

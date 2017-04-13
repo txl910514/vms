@@ -5,6 +5,7 @@ import Index       from '../views/Index.vue'
 import Errors      from '../views/Errors.vue'
 import Login       from '../views/Login.vue'
 import Profile     from '../views/Profile.vue'
+import Article     from '../views/Article.vue'
 
 import Timeline    from '../views/items/Timeline.vue'
 import Articles    from '../views/items/Articles.vue'
@@ -26,6 +27,8 @@ export const router = new VueRouter({
 
     { path: '/profile', component: Profile, meta: {title: `${base}个人资料`}},
     { path: '/login', component: Login, meta: {title: `${base}登录`}},
+
+    { path: '/article', component: Article, meta: {title: `${base}预览`}},
 
     { path: '/timeline', component: Timeline, meta: {title: `${base}内容`}},
     { path: '/users', component: Users, meta: {title: `${base}用户`}},

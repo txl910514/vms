@@ -6,16 +6,6 @@
 <script>
 export default {
   name: 'error',
-  computed: {
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
-  },
-  beforeMount () {
-  }
 }
 </script>
 

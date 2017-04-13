@@ -54,17 +54,10 @@ html, body
   border 1px solid #D3D3D3
 
 #app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
   color #2c3e50
   background rgb(248, 248, 248)
   height 100%
   width 100%
-
-  li
-    list-style none
 
   a
     display inline-block
@@ -137,10 +130,8 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
-  padding: 0;
+/*  padding: 0;*/
   border: 0;
-  // font-size: 100%;
-  // font: inherit;
   vertical-align: baseline;
 }
 
@@ -151,10 +142,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   line-height: 1;
-}
-
-ol, ul {
-  list-style: none;
 }
 
 blockquote, q {
