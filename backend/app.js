@@ -65,7 +65,7 @@ const createUser = async ()=> {
     password:   id,
     permission: ['dev'],
     code:       id,
-    conpany:    '测试账号'
+    company:    '测试账号'
   });
 };
 

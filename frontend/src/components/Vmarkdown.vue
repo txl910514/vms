@@ -19,6 +19,10 @@ export default {
   },
   computed: {
     compiledMarkdown: function () {
+      this.$store.commit('SET_ITEM', {
+        key: 'editor',
+        val: this.input
+      })
       return marked(this.input, { sanitize: true })
     }
   },
@@ -31,7 +35,7 @@ export default {
       this.$set(this, 'hidden', !this.hidden)
       setTimeout(()=> {
         this.$set(this, 'hidden', !this.hidden)
-      }, 10)
+      }, 1)
     }
   }
 }

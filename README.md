@@ -29,7 +29,7 @@ git clone https://github.com/ericjjj/vms.git
 
 # start backend, need mongodb
 cd backend/utils
-# modify config.js
+# modify config.js (qiniu)
 cp config.simple.js config.js
 cd ..
 # start
@@ -37,7 +37,7 @@ NODE_ENV=dev node index.js
 
 # start websites
 cd frontend/src
-# modify config.js
+# modify config.js (qiniu)
 cp config.simple.js config.js
 cd ..
 # start

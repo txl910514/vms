@@ -10,12 +10,12 @@
       el-table-column(type='expand')
         template(scope='props')
           h1 预览
-          div(v-html='templateHtml(props.row.content)')
+          div(v-html='templateHtml(props.row)')
           br
       el-table-column(type="index", width="100")
-      el-table-column(prop='_index', label='索引')
+      el-table-column(prop='_index', label='索引', width="100")
       el-table-column(prop='title', label='标题')
-      el-table-column(prop='status', label=' 状态', width="200")
+      el-table-column(prop='status', label=' 状态', width="100")
       el-table-column(prop='user.nickname', label='用户名', width="150")
       el-table-column(prop='likes.length', label='点赞数', width="100")
       el-table-column(prop='send_at', label='发送时间', width="200")
@@ -40,13 +40,15 @@ export default {
   computed: {
     items () {
       const articles = this.$store.state.adminItems
+      articles.forEach(el => {
+        if (el.status === 'send') {el.status = '已发布'}
+      })
       return articles
     }
   },
   data () {
     return {
       start: 0,
-      search: ''
     }
   },
   methods: {
@@ -64,15 +66,7 @@ export default {
       })
     },
     handleEdit (index, row) {
-      this.$store.commit('SET_ITEM', {
-        key: 'editorStatus',
-        val: 'updateArticle'
-      })
-      this.$store.commit('SET_ITEM', {
-        key: 'medium',
-        val: row
-      })
-      this.$router.push(`/addArticle`)
+      this.$router.push(`/addArticle?id=${row._id}`)
     },
     handleDelete(index, row) {
       const _this = this
@@ -89,7 +83,14 @@ export default {
       this.fetch(val - 1)
       console.log(`当前页: ${val}`);
     },
-    templateHtml(html) {return `<div v-highlightjs>${html}</div>`},
+    templateHtml(article) {
+      if (article.markdown) {
+        return `<div v-highlightjs>${
+          marked(article.markdown, { sanitize: true })
+        }</div>`
+      }
+      return `<div v-highlightjs>${article.html}</div>`
+    },
   },
   beforeMount () {
     this.fetch()

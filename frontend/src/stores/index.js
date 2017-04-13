@@ -6,12 +6,11 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    adminItems:   [],
-    medium:       {},
-    uptoken:      '',
-    total:        {},
-    editorStatus: 'createArticle',
-    editorType:   'richText',
+    adminItems:       [],
+    uptoken:          '',
+    total:            {},
+    editor:           {},
+    isMarkdownEditor: false,
   },
 
   mutations: {
@@ -40,6 +39,7 @@ export const store = new Vuex.Store({
         commit('SET_ITEM', {key: 'adminItems', val: items.data.data })
       }).catch((err) => {
         console.log(err)
+        req.msg.error('error')
       })
     },
     ADD_ADMIN_ITEM: ({ commit, state }, req) => {
@@ -53,6 +53,7 @@ export const store = new Vuex.Store({
         }
       }).catch((err) => {
         console.log(err)
+        req.msg.error('error')
       })
     },
     UPDATE_ADMIN_ITEM: ({ commit, state }, req) => {
@@ -65,6 +66,7 @@ export const store = new Vuex.Store({
         }
       }).catch((err) => {
         console.log(err)
+        req.msg.error('error')
       })
     },
     DELETE_ADMIN_ITEM: ({ commit, state }, req) => {
@@ -76,6 +78,7 @@ export const store = new Vuex.Store({
           req.msg.error('error')
         }
       }).catch((err) => {
+        req.msg.error('error')
         console.log(err)
       })
     }

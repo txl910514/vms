@@ -6,7 +6,8 @@
     #editor-header.border1
       img(:src='form.headerImg', alt='', v-if='form.headerImg')
       #header-button(v-else) 点击上传 .jpg/.png (可选)
-    vmarkdown(style="height:400px;max-height:500px;" v-if='isMarkdownEditor')
+    vmarkdown(style="height:400px;max-height:500px;"
+              v-if='isMarkdownEditor' v-bind:markdown='form.markdown')
     veditor#veditor(style="height:400px;max-height:500px;", v-else)
     commit-component(:_form         = 'form',
                      :dialogVisible = 'dialogVisible',
@@ -23,8 +24,11 @@ export default {
   name: 'add-article',
   computed: {
     isMarkdownEditor () {
-     return this.$store.state.editorType === 'markdown'
-    }
+     return this.$store.state.isMarkdownEditor
+    },
+    isUpdate () {
+      return this.$route.query.id || undefined
+    },
   },
   data () {
     return {
@@ -34,7 +38,6 @@ export default {
         headerImg: '',
         sendAt:    '',
         status:    'send',
-        content:   '',
         html:      '',
         markdown:  '',
       },
@@ -45,17 +48,14 @@ export default {
     }
   },
   methods: {
-
     dialogConfim () {
       this.$router.push('/articles')
       Object.assign(this.$data, this.$options.data());
     },
     onSubmit() {
-
       let _this    = this,
       dispatch     = 'ADD_ADMIN_ITEM',
-      url          = 'article',
-      editorStatus = this.$store.state.editorStatus;
+      url          = 'article';
       if (!this.form.title ||
           this.form.status === 'schedule' &&
           this.form.sendAt < Date.now()) {
@@ -63,50 +63,46 @@ export default {
         return;
       }
 
-      if (isMarkdownEditor) {
-        // let html       = this.$store.state.editor.$txt.html();
-        // this.$set(this.form, 'content', html)
+      if (this.isMarkdownEditor) {
+        this.$set(this.form, 'markdown', this.$store.state.editor)
       } else {
-        let html       = this.$store.state.editor.$txt.html();
-        this.$set(this.form, 'content', html)
+        let html = this.$store.state.editor.$txt.html();
+        this.$set(this.form, 'html', html)
       }
 
-      if (editorStatus === 'updateArticle') {
+      if (this.isUpdate) {
         dispatch = 'UPDATE_ADMIN_ITEM',
-        url = `article/${_this.$store.state.medium._id}`
+        url = `article/${_this.form._id}`
       }
 
       this.$store.dispatch(dispatch, {
         url: url,
         msg: _this.$message,
         data: _this.form,
-        cb: () => {
-          _this.$set(_this, 'dialogVisible', true)
-          _this.$store.commit('SET_ITEM', {
-            key: 'editorStatus',
-            val: 'createArticle'
-          })
-          _this.$store.commit('SET_ITEM', {
-            key: 'article',
-            val: {}
-          })
-        }
+        cb: () => {_this.$set(_this, 'dialogVisible', true)}
       })
     }
   },
   mounted () {
-    let _this = this, article = this.$store.state.medium;
-
+    const _this = this;
     tools.qiniu(_this, 'editor-header', 'editor-header', 'article/header',
       (sourceLink) => {
       _this.$set(_this.form, 'headerImg', sourceLink)
     })
 
-    if (article && article.content) {
-      this.$store.state.editor.$txt.html(article.content)
-      this.$set(this, 'form', article)
-    }
+    if (!this.isUpdate) { return; }
 
+    api._get({url: `article/${this.$route.query.id}`})
+    .then(res => {
+      const article = res.data.data
+      _this.form = article
+      if (article.html) {_this.$store.state.editor.$txt.html(article.html)}
+      else {
+        this.$store.commit('SET_ITEM', {key: 'isMarkdownEditor', val: true})
+      }
+    }).catch(error => {
+      console.log(error);
+    })
   }
 }
 </script>

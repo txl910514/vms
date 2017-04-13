@@ -11,6 +11,8 @@ const Article = new Base('Article', {
   headerImg: String,
   title:     String,
   content:   String,
+  markdown:  String,
+  html:      String,
   status:    String,
   job:       {},
   sendAt:    { type: Date, default: Date.now },
@@ -21,14 +23,16 @@ const Article = new Base('Article', {
 const validateSchema = $.paramter.object().keys({
   title:     $.paramter.string(),
   user:      $.paramter.string(),
-  content:   $.paramter.string(),
+  content:   $.paramter.string().empty(''),
+  markdown:  $.paramter.string().empty(''),
+  html:      $.paramter.string().empty(''),
   subTitle:  $.paramter.string().empty(''),
   headerImg: $.paramter.string().empty(''),
   status:    $.paramter.string(),
   sendAt:    $.paramter.date().empty(''),
 })
-.with('title', 'content', 'user')
-.without('headerImg', 'subTitle', 'sendAt'); // optional
+.with('title', 'user')
+.without('headerImg', 'subTitle', 'sendAt', 'html', 'markdown', 'content'); // optional
 
 Article.methods.create = async function (query) {
   const { error, value } = $.paramter.validate(query, validateSchema);

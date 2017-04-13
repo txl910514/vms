@@ -35,13 +35,12 @@ export default {
   },
   methods: {
     changeEditor () {
-      const current = this.$store.state.editorType
-      let to = current === 'markdown' ? 'richText' : 'markdown'
+      const current = this.$store.state.isMarkdownEditor
       this.$store.commit('SET_ITEM', {
-        key: 'editorType',
-        val: to
+        key: 'isMarkdownEditor',
+        val: !current
       })
-      this.$message.success(to)
+      this.$message.success('切换成功')
     }
   },
   beforeMount () {
