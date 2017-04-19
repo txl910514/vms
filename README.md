@@ -1,5 +1,6 @@
 # VMS
-Vue.js Management System
+Vue.js Management System 
+Demo: http://vms.ericjj.com/
 
 [![Build Status](https://travis-ci.org/ericjjj/vms.svg?branch=master)](https://travis-ci.org/ericjjj/vms)
 [![Code Climate](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/badges/be1cc8f745e432cd57ec/gpa.svg)](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/feed)
