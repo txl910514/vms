@@ -13,13 +13,12 @@ Vue.js Management System
 
 * Vue.js 2+
 * Element UI
-* 集成 wangEditor 富文本编辑器 (新浪表情包支持)
-* 集成轻量级 markdown 编辑器
-* 集成七牛云图片上传
-* 集成极光推送
-* 完整 Node.js 后端
-* 后端角色权限控制
-* 容易部署
+* WangEditor
+* MarkdownEditor
+* Upload pictures by qiniu
+* Node.js backend
+* Role access control
+* Easy to deploy
 
 ### How to Start
 
