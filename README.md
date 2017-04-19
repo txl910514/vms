@@ -13,8 +13,8 @@ Vue.js Management System
 
 * Vue.js 2+
 * Element UI
-* WangEditor
-* MarkdownEditor
+* WYSIWYG Editor
+* Markdown Editor
 * Upload pictures by qiniu
 * Node.js backend
 * Role access control
