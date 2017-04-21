@@ -19,7 +19,7 @@ Live Demo: http://vms.ericjj.com/
 * Element UI
 * WYSIWYG Editor
 * Markdown Editor
-* Upload pictures by qiniu
+* Upload pictures to qiniu
 * Node.js backend
 * Role access control
 * Easy to deploy
