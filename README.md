@@ -3,11 +3,12 @@
 [![Code Climate](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/badges/be1cc8f745e432cd57ec/gpa.svg)](https://codeclimate.com/repos/58edfcb0bab24b0265000e3b/feed)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-Vue.js Management System 
 
 It is used by [GeekPark](http://geekpark.net)
 
-Live Demo: http://vms.ericjj.com/
+Live demo: http://vms.ericjj.com/
+
+Contact: github@ericjj.com
 
 ### ENV
 * Node.js 6+
