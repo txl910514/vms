@@ -95,3 +95,4 @@ module.exports.authSession = async function (req, res, next) {
 
   result(res, `Permission denied. ${url}, your permission is ${user.permission}`);
 }
+
